@@ -11,6 +11,8 @@ public class One {
 		System.out.println(count(3, 3));
 
 		System.out.println(getListOfPaths("", 3, 3));
+		
+		System.out.println(getListOfPathsDagonals("", 3, 3));
 	}
 
 //	You are given a N x N matrix. you are at (0,0) and you need to reach ((N-1),(N-1))
@@ -51,5 +53,34 @@ public class One {
 		return list;
 
 	}
+	
+	
+//	include diagonals as well
+	public static List<String> getListOfPathsDagonals(String ans, int noRows, int noCols) {
+		if(noRows == 1 && noCols == 1) {
+			List<String> tempList = new ArrayList<String>();
+			tempList.add(ans);
+			return tempList;
+		}
+		
+		List<String> list = new ArrayList<String>();
+		
+		if(noRows>1 && noCols>1) {
+			list.addAll(getListOfPathsDagonals(ans+"d", noRows-1, noCols-1));
+		}
+		
+		if(noRows>1) {
+			list.addAll(getListOfPaths(ans+"D", noRows-1, noCols));
+		}
+		if(noCols>1) {
+			list.addAll(getListOfPaths(ans+"R", noRows, noCols-1));
+		}
+		
+		return list;
+
+	}
+	
+	
+	
 
 }
