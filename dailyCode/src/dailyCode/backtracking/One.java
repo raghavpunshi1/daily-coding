@@ -1,11 +1,16 @@
 package dailyCode.backtracking;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class One {
 
 	public static void main(String[] args) {
 //		Given a matrix 3x3
 //		we will pass the length of rows and columns
 		System.out.println(count(3, 3));
+
+		System.out.println(getListOfPaths("", 3, 3));
 	}
 
 //	You are given a N x N matrix. you are at (0,0) and you need to reach ((N-1),(N-1))
@@ -23,6 +28,28 @@ public class One {
 		int goRight = count(noRows, noCols - 1);
 
 		return goDown + goRight;
+	}
+
+//	 prcessed unprocessed string method
+//	return a List of answwers
+	public static List<String> getListOfPaths(String ans, int noRows, int noCols) {
+		if(noRows == 1 && noCols == 1) {
+			List<String> tempList = new ArrayList<String>();
+			tempList.add(ans);
+			return tempList;
+		}
+		
+		List<String> list = new ArrayList<String>();
+		
+		if(noRows>1) {
+			list.addAll(getListOfPaths(ans+"D", noRows-1, noCols));
+		}
+		if(noCols>1) {
+			list.addAll(getListOfPaths(ans+"R", noRows, noCols-1));
+		}
+		
+		return list;
+
 	}
 
 }
